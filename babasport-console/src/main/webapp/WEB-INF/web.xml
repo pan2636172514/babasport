@@ -10,20 +10,25 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- 告知监听器去类路径下加载配置文件 -->
-  <context-param>
-  	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:application-context.xml</param-value>
-  </context-param>
-
+  <!-- 前端控制器 -->
+  <servlet>
+  	  <servlet-name>console</servlet-name>
+  	  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	  <init-param>
+  	  	  <param-name>contextConfigLocation</param-name>
+  	  	  <param-value>classpath:springmvc-console.xml</param-value>
+  	  </init-param>
+  </servlet>
   
   
-  <!-- 配置ServletContextListener监听器 -->
-  <listener>
-  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  
- 
-  
-  
+  <servlet-mapping>
+   	<servlet-name>console</servlet-name>
+   	<!-- 
+   	  1:*.do *.action  拦截以 .do .action 结尾的请求      后台开发 
+   	  2: /   拦截所有请求   不包含.jsp  包含.js .css .png .jgp    建议使用此种方式      前台开发  配置静态资源放行
+   	  3: /*  拦截所及请求 包含.jsp 及所有    不建议使用  不用
+   	
+   	 -->
+   	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
 </web-app>
