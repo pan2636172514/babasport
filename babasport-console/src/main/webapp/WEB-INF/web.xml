@@ -10,18 +10,20 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <!-- 告知监听器去类路径下加载配置文件 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:application-context.xml</param-value>
+  </context-param>
+
+  
+  
   <!-- 配置ServletContextListener监听器 -->
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
-  <!-- 告知监听器去类路径下加载配置文件 -->
-  <context-param>
-  	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
-
-  
+ 
   
   
 </web-app>
