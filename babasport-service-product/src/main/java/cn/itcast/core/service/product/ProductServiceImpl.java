@@ -1,11 +1,14 @@
 package cn.itcast.core.service.product;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.page.Pagination;
 import cn.itcast.core.dao.product.ProductDao;
+import cn.itcast.core.pojo.product.Product;
 import cn.itcast.core.pojo.product.ProductQuery;
 import cn.itcast.core.pojo.product.ProductQuery.Criteria;
 
@@ -65,4 +68,22 @@ public class ProductServiceImpl implements ProductService {
 		
 		return pagination;
 	}
+	
+	//保存商品信息
+	public void insertProduct(Product product){
+		//商品的字段没有在页面输入
+		//下架
+		product.setIsShow(false);
+		//不删除
+		product.setIsDel(true);
+		//时间
+		product.setCreateTime(new Date());
+		//保存商品的同时返回商品ID
+		productDao.insertSelective(product);
+		//保存库存
+	}
+	
+	
+	
+	
 }

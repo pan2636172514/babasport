@@ -1,5 +1,6 @@
 package cn.itcast.core.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.itcast.common.page.Pagination;
 import cn.itcast.core.pojo.product.Brand;
+import cn.itcast.core.pojo.product.Color;
+import cn.itcast.core.pojo.product.Product;
 import cn.itcast.core.service.product.BrandService;
+import cn.itcast.core.service.product.ColorService;
 import cn.itcast.core.service.product.ProductService;
 
 /**
@@ -40,4 +44,27 @@ public class ProductController {
 		
 		return "product/list";
 	}
+	
+	@Autowired
+	private ColorService colorService;
+	//去商品添加页面
+	@RequestMapping(value = "/product/toAdd.do")
+	public String toAdd(Model model){
+		//品牌结果集
+		List<Brand> brands = brandService.selectBrandListByQuery(null, 1);
+		//查询颜色的结果集
+		List<Color> colors = colorService.selectColors();
+		model.addAttribute("brands", brands);
+		model.addAttribute("colors", colors);
+		return "product/add";
+	}
+	
+	// 保存商品
+	@RequestMapping(value = "/product/add.do")
+	public String add(Product product){
+
+		
+		return "";
+	}
+	
 }
