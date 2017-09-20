@@ -20,12 +20,27 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		<!-- 服务提供方    -->
+		<!-- 服务消费方    -->
 		<!-- 1:起名称   计算机  -->
 		<dubbo:application name="babasport-console"/>
 		<!-- 2:连接注册中心  -->
-		<dubbo:registry address="192.168.200.129:2181" protocol="zookeeper"/>
-		<!-- 3:暴露服务   接口 -->
-		<dubbo:reference interface="cn.itcast.core.service.TestTbService" id="testTbService" />
+<!-- 		<dubbo:registry address="192.168.200.130:2181" protocol="zookeeper"/> -->
+		<dubbo:registry address="N/A" />
+		<!-- 3:调用服务   接口  毫秒 -->
+		<dubbo:reference interface="cn.itcast.core.service.TestTbService" id="testTbService"
+		 url="dubbo://127.0.0.1:20880" 
+		/>
+		<dubbo:reference interface="cn.itcast.core.service.product.BrandService" id="brandService"
+		 url="dubbo://127.0.0.1:20880" 
+		/>
+		<dubbo:reference interface="cn.itcast.core.service.product.UploadService" id="uploadService"
+		 url="dubbo://127.0.0.1:20880" 
+		/>
+		<dubbo:reference interface="cn.itcast.core.service.product.ProductService" id="productService"
+		 url="dubbo://127.0.0.1:20880" 
+		/>
 		
-	</beans>
+		<!-- 全局设置 -->
+		<dubbo:consumer timeout="600000"  check="false"/>
+		
+</beans>

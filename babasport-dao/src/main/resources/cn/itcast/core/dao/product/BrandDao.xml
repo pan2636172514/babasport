@@ -1,0 +1,77 @@
+<?xml version= "1.0" encoding ="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itcast.core.dao.product.BrandDao">
+
+	<resultMap type="Brand" id="brand">
+		<result column="img_url" property="imgUrl"/>
+		<result column="is_display" property="isDisplay"/>
+	</resultMap>
+
+<!-- 	//查询品牌结果集  根据条件 -->
+<!-- 	public List<Brand> selectBrandListByQuery(BrandQuery brandQuery); -->
+	<select id="selectBrandListByQuery" parameterType="BrandQuery" resultMap="brand">
+		select * from bbs_brand
+		<where>
+			<if test="name != null">
+				name  like "%"#{name}"%"
+			</if>
+			<if test="isDisplay != null">
+				and is_display = #{isDisplay}
+			</if>
+		</where>
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+<!-- 	//	总条数（根据条件） -->
+<!-- 	public Integer countBrandByQuery(BrandQuery brandQuery); -->
+	<select id="countBrandByQuery" parameterType="BrandQuery" resultType="Integer">
+		select count(1) from bbs_brand
+		<where>
+			<if test="name != null">
+				name  like "%"#{name}"%"
+			</if>
+			<if test="isDisplay != null">
+				and is_display = #{isDisplay}
+			</if>
+		</where>
+	</select>
+	
+<!-- 	//通过品牌ID查询品牌对象 -->
+<!-- 	public Brand selectBrandById(Long id); -->
+	 <select id="selectBrandById" parameterType="Long" resultMap="brand">
+	 	select * from bbs_brand  where id = #{vvvv}
+	 </select>
+	 
+	 
+
+<!-- 	 	//修改 -->
+<!-- 	public void updateBrandById(Brand brand); -->
+	 <update id="updateBrandById" >
+	 	 update bbs_brand
+	 	 <set>
+	 	 	<if test="name != null">
+	 	 		name = #{name},
+	 	 	</if>
+	 	 	<if test="imgUrl != null">
+	 	 		img_url = #{imgUrl}
+	 	 	</if>
+	 	 </set>
+	 	 <where>
+	 	 	id = #{id}
+	 	 </where>
+	 </update>
+	 	
+<!-- 	//批量删除 -->  
+<!-- 	public void deletes(Long[] ids); -->
+	<delete id="deletes" parameterType="Long[]">
+		delete from bbs_brand
+		<where>
+			<foreach collection="array" item="id" open="id in (" close=")" separator=",">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

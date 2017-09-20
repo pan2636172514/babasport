@@ -23,12 +23,24 @@
 		<!-- 扫描Controller -->
 		<context:component-scan base-package="cn.itcast"/>
 		
-		<!-- 处理器映射器  适配器 -->
-		<mvc:annotation-driven />
+		<!-- 处理器映射器  适配器   -->
+		<mvc:annotation-driven conversion-service="conversionServiceFactoryBean"/>
+		
+		<!-- 转换服务   转换工厂   日期转换  去掉前后空格   -->
+		<bean id="conversionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+			<property name="converters">
+				<set>
+					<bean class="cn.itcast.common.conversion.TrimConverter"/>
+				</set>
+			</property>
+		</bean>
+		
+		<!-- 上传图片 -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 		
 		<!-- 视图解析器 -->
 		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-			<property name="prefix" value="/WEB-INF/jsp/"/>
+			<property name="prefix" value="/WEB-INF/console/"/>
 			<property name="suffix" value=".jsp"/>
 		</bean>
 		

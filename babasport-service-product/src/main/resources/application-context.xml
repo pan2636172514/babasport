@@ -20,7 +20,8 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		<!-- 导入 -->
+		
 		<import resource="config/*.xml"/>
+		
 		
 </beans>

@@ -3,8 +3,19 @@ package cn.itcast.core.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TestTb implements Serializable {
+/**
+ * 测试POJO
+ * @author lx
+ *
+ */
+public class TestTb implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//ID
 	private Integer id;
 	private String name;
 	private Date birthday;
@@ -30,6 +41,7 @@ public class TestTb implements Serializable {
 	public String toString() {
 		return "TestTb [id=" + id + ", name=" + name + ", birthday=" + birthday + "]";
 	}
+	
 	
 	
 }
