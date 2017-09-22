@@ -73,9 +73,9 @@ function uploadPic(){
 						 + '<td width="20%" class="pn-flabel pn-flabel-h"></td>'
 						 + '<td width="80%" class="pn-fcontent">';
 				for(var i=0;i<data.length;i++){
-					html += '<img width="100" height="100" src="' + data[i] + '" />'
-					     +  '<input type="hidden" name="imgUrl" value="' + data[i] + '"/>'
-					     +  '<a href="javascript:;" class="pn-opt" onclick="jQuery(this).remove()">删除</a>'
+					html += '<a href="javascript:;" class="pn-opt" onclick="jQuery(this).remove()">'
+							+'<img width="100" height="100" src="' + data[i] + '" />'
+					     	+'<input type="hidden" name="imgUrl" value="' + data[i] + '"/>'+'删除</a>'
 
 				}
 				 html += '<hr/><a href="javascript:;" class="pn-opt" onclick="jQuery(this).parents(\'tr\').remove()">全部删除</a>'  

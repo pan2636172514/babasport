@@ -20,21 +20,11 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		<!-- 服务提供方    -->
-		<!-- 1:起名称   计算机  -->
-		<dubbo:application name="babasport-service-product"/>
-		<!-- 2:连接注册中心  -->
-<!-- 		<dubbo:registry address="192.168.200.130:2181" protocol="zookeeper"/> -->
-		<dubbo:registry address="N/A" />
-		<!-- 3:暴露自己的ip:port   -->
-		<dubbo:protocol host="127.0.0.1" port="20880"/>
-		<!-- 4:暴露服务   接口 -->
-		<dubbo:service interface="cn.itcast.core.service.TestTbService" ref="testTbService" />
-		<dubbo:service interface="cn.itcast.core.service.product.BrandService" ref="brandService" />
-		<dubbo:service interface="cn.itcast.core.service.product.UploadService" ref="uploadService" />
-		<dubbo:service interface="cn.itcast.core.service.product.ProductService" ref="productService" />
-		<dubbo:service interface="cn.itcast.core.service.product.ColorService" ref="colorService" />
-		<dubbo:service interface="cn.itcast.core.service.product.SkuService" ref="skuService" />
+		<!-- jedis单价版     -->
+		<bean id="jedis" class="redis.clients.jedis.Jedis">
+			<constructor-arg value="192.168.200.130" index="0" type="java.lang.String"/>
+			<constructor-arg value="6379" index="1"/>
+		</bean>		
 		
 		
 </beans>

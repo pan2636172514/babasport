@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.page.Pagination;
 import cn.itcast.core.dao.product.ProductDao;
+import cn.itcast.core.dao.product.SkuDao;
 import cn.itcast.core.pojo.product.Product;
 import cn.itcast.core.pojo.product.ProductQuery;
 import cn.itcast.core.pojo.product.ProductQuery.Criteria;
+import cn.itcast.core.pojo.product.Sku;
+import redis.clients.jedis.Jedis;
 
 /**
  * 商品管理
@@ -69,8 +72,18 @@ public class ProductServiceImpl implements ProductService {
 		return pagination;
 	}
 	
+	@Autowired
+	private SkuDao skuDao;
+	
+	@Autowired
+	private Jedis jedis;
+	
 	//保存商品信息
 	public void insertProduct(Product product){
+		//商品id 在redis中取到
+		Long id = jedis.incr("pno");
+		product.setId(id);
+		
 		//商品的字段没有在页面输入
 		//下架
 		product.setIsShow(false);
@@ -80,7 +93,35 @@ public class ProductServiceImpl implements ProductService {
 		product.setCreateTime(new Date());
 		//保存商品的同时返回商品ID
 		productDao.insertSelective(product);
-		//保存库存
+		
+		//库存的数据
+		for(String color : product.getColors().split(",")){
+			for(String size : product.getSizes().split(",")){
+				Sku sku = new Sku();
+				//商品的id
+				sku.setProductId(product.getId());
+				//颜色的id
+				sku.setColorId(Long.parseLong(color));
+				//尺码
+				sku.setSize(size);
+				//市场价格
+				sku.setMarketPrice(0f);
+				//售价
+				sku.setPrice(0f);
+				//运费
+				sku.setDeliveFee(10f);
+				//库存
+				sku.setStock(0);
+				//购买的限制
+				sku.setUpperLimit(200);
+				//时间
+				sku.setCreateTime(new Date());
+				//保存库存到数据库
+				skuDao.insertSelective(sku);
+			}
+		}
+			
+		
 	}
 	
 	

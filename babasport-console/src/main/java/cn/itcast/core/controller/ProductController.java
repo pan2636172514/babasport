@@ -47,6 +47,7 @@ public class ProductController {
 	
 	@Autowired
 	private ColorService colorService;
+	
 	//去商品添加页面
 	@RequestMapping(value = "/product/toAdd.do")
 	public String toAdd(Model model){
@@ -62,9 +63,11 @@ public class ProductController {
 	// 保存商品
 	@RequestMapping(value = "/product/add.do")
 	public String add(Product product){
-
+		//保存
+		productService.insertProduct(product);
 		
-		return "";
+		return "redirect:/product/list.do";
 	}
+
 	
 }

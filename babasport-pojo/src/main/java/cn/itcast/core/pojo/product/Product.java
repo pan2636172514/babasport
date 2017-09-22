@@ -45,7 +45,7 @@ public class Product implements Serializable {
     private Boolean isShow;
 
     /**
-     * 商品图片集
+     * 商品图片集  
      */
     private String imgUrl;
 
@@ -78,6 +78,11 @@ public class Product implements Serializable {
      * 添加时间
      */
     private Date createTime;
+    
+    //附加方法
+    public String[] getImages(){
+    	return imgUrl.split(",");
+    }
 
     private static final long serialVersionUID = 1L;
 

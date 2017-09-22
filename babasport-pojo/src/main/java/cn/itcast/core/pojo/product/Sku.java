@@ -51,6 +51,17 @@ public class Sku implements Serializable {
 
     private Date createTime;
 
+    //颜色对象
+    private Color color;
+    
+    public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+    
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
