@@ -69,5 +69,20 @@ public class ProductController {
 		return "redirect:/product/list.do";
 	}
 
+	//商品上架
+	@RequestMapping(value = "/brand/isShow.do")
+	public String isShow(Long[] ids,Model model){
+		//上架
+		productService.isShow(ids);
+		return "redirect:/product/list.do";
+	}
+	
+	//商品的下架
+	@RequestMapping(value = "/brand/isHide.do")
+	public String isHide(Long[] ids,Model model){
+		//下架
+		productService.isHide(ids);
+		return "redirect:/product/list.do";
+	}
 	
 }

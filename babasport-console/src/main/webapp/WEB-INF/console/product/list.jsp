@@ -7,7 +7,7 @@
 <title>babasport-list</title>
 <script type="text/javascript">
 //上架
-function isShow(){
+function isShow(name,brandId,isShow,pageNo){
 	//请至少选择一个
 	var size = $("input[name='ids']:checked").size();
 	if(size == 0){
@@ -19,11 +19,35 @@ function isShow(){
 		return;
 	}
 	//提交 Form表单
-	$("#jvForm").attr("action","/brand/isShow.do");
+	$("#jvForm").attr("action","/brand/isShow.do?name="+name+"&brandId="+brandId+"&isShow="+isShow+"&pageNo="+pageNo);
 	$("#jvForm").attr("method","post");
 	$("#jvForm").submit();
 	
 }
+
+//下架
+function isHide(name,brandId,isShow,pageNo){
+	//请至少选择一个
+	var size = $("input[name='ids']:checked").size();
+	if(size == 0){
+		alert("请至少选择一个");
+		return;
+	}
+	//你确定删除吗
+	if(!confirm("你确定下架吗")){
+		return;
+	}
+	//提交 Form表单
+	$("#jvForm").attr("action","/brand/isHide.do?name="+name+"&brandId="+brandId+"&isShow="+isShow+"&pageNo="+pageNo);
+	$("#jvForm").attr("method","post");
+	$("#jvForm").submit();
+	
+}
+//删除
+function optDelete(){
+	alert("您的权限不够，请联系管理员-12345678");
+}
+
 </script>
 </head>
 <body>
@@ -93,7 +117,7 @@ function isShow(){
 		</c:forEach>
 	</span>
 </div>
-<div style="margin-top:15px;"><input class="del-button" type="button" value="删除" onclick="optDelete();"/><input class="add" type="button" value="上架" onclick="isShow();"/><input class="del-button" type="button" value="下架" onclick="isHide();"/></div>
+<div style="margin-top:15px;"><input class="del-button" type="button" value="删除" onclick="optDelete();"/><input class="add" type="button" value="上架" onclick="isShow('${name}','${brandId }','${isShow }','${pagination.pageNo }');"/><input class="del-button" type="button" value="下架" onclick="isHide('${name}','${brandId }','${isShow }','${pagination.pageNo }');"/></div>
 </form>
 </div>
 </body>

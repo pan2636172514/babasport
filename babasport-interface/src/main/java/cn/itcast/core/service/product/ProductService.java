@@ -11,4 +11,9 @@ public interface ProductService {
 	//保存商品
 	public void insertProduct(Product product);
 
+	//商品上架
+	public void isShow(Long[] ids);
+	
+	//商品的下架
+	public void isHide(Long[] ids);
 }

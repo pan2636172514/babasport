@@ -124,7 +124,31 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 	
+	//商品的上架
+	public void isShow(Long[] ids){
+		Product product = new Product();
+		//上架的状态
+		product.setIsShow(true);
+		
+		for (Long id : ids) {
+			product.setId(id);
+			productDao.updateByPrimaryKeySelective(product);
+			//TODO slore保存
+			
+		}
+	}
 	
-	
+	//商品的下架
+	public void isHide(Long[] ids){
+		Product product = new Product();
+		//上架的状态
+		product.setIsShow(false);
+		
+		for (Long id : ids) {
+			product.setId(id);
+			productDao.updateByPrimaryKeySelective(product);
+			
+		}
+	}
 	
 }
